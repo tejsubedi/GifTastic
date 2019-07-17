@@ -1,56 +1,85 @@
 
-var animals = ["dog", "cat","rabit", "goldfish","bird","chicken"];
+var animals = ["dog", "cat", "rabit", "goldfish", "bird", "chicken"];
+var input = $("#giphy-input");
+var submit = $("#add-image");
+var apiKey = "7wvH2s5AVnzCW2IrWSg3D3SUhgmnGBXq";
+var imgBody = $(".img-body");
+var btnDisplayDiv = $("#buttons-view");
 
-function displayAnimalImage(){
-    var animal = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9";
+function displayAnimalImage() {
+  var animal = $(this).attr("data");
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q= " + animal + "&api_key=" +apiKey +"&limit=10";
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function (response) {
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response) {
-        console.log(response);
+    //Creating the div for animals pic display
+    //var results = $(".results");
+    var animalDiv = $("<div class='animal'>");
+    //var resultdIV = results.append(animalDiv);
+    //var imageBox = $(".img-box");
+    //var imageDiv = resultdIV.append(imageBox);
+    
+    //storing the rating of animal pic
+    var animalPic = response.data;
+    //   console.log("Animaldata" + animalPic);
 
-        //Creating the div for animals pic display
-      var animalDiv = $("<div class='movie'>");
-      //storing the rating of animal pic
-      var rating = response.data[0].rating;
-      var pRating = $("<p>").text(`Rating: ${rating}`);
-      animalDiv.append(pRating);
-      var imgURL = response.data[0].images.downsized.url;
-      var image = $("<img>").attr("src", imgURL);
-      animalDiv.append(image);
-      $("#images-view").prepend(animalDiv);
-      });
-      
-
-}
-
-function renderButton(){
-    $("#buttons-view").empty();
-    for (var i = 0; i < animals.length; i++) {
-        var a = $("<button>");
-        a.addClass("animal-btn");
-        a.attr(animals[i]);
-        a.text(animals[i]);
-        $("#buttons-view").append(a);
-
-    }
-
-
+    animalPic.forEach(function (animal) {
+      var rating = animal.rating;
+      var imgURL = animal.images.downsized.url;
+      // var pRating = $("<p>").text(`Rating: ${rating}`);
+      // imgBody.append(pRating);
+     // var image = $("<img>").attr("src", imgURL);
+      //imageDiv.append(image);
+      createBox(imgURL);
+    })
+    // $("#images-view").prepend(animalDiv);
+  });
 
 
 }
 
-$("#add-image").on("click", function(event){
-    event.preventDefault();
-    var animal = $("#giphy-input").val().trim();
-    animals.push(animal);
-    renderButton();
+function renderButton() {
+  btnDisplayDiv.empty();
+  for (var i = 0; i < animals.length; i++) {
+    var dButton = $("<button>");
+    dButton.addClass("animal-btn");
+    dButton.attr("data", animals[i]);
+    dButton.text(animals[i]);
+    btnDisplayDiv.append(dButton);
+  }
+
+}
+
+btnDisplayDiv.on("click", function(event){
+  event.preventDefault();
+  imgBody.empty();
 })
+
+
+submit.on("click", function (event) {
+  event.preventDefault();
+  //imgBody.empty();
+  var inputVal = input.val().trim();
+  animals.push(inputVal);
+  imgBody.empty();
+  renderButton();
+  
+})
+
+
+
+function createBox(imgUrl){
+
+  var newImg = $("<img>");
+  newImg.attr("src", imgUrl);
+  newImg.addClass("img-box");
+  imgBody.append(newImg);
+}
 
 $(document).on("click", ".animal-btn", displayAnimalImage);
 renderButton();
+imgBody.empty();
 // displayAnimalImage();
 
-    
