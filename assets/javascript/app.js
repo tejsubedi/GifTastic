@@ -28,7 +28,9 @@ function displayAnimalImage() {
     animalPic.forEach(function (animal) {
       var rating = animal.rating;
       var imgURL = animal.images.downsized.url;
-      // var pRating = $("<p>").text(`Rating: ${rating}`);
+      // var pRating = $("<p>");
+      // pRating.addClass("pg-box");
+      // pRating.text(`Rating: ${rating}`);
       // imgBody.append(pRating);
      // var image = $("<img>").attr("src", imgURL);
       //imageDiv.append(image);
@@ -60,7 +62,6 @@ btnDisplayDiv.on("click", function(event){
 
 submit.on("click", function (event) {
   event.preventDefault();
-  //imgBody.empty();
   var inputVal = input.val().trim();
   animals.push(inputVal);
   imgBody.empty();
@@ -79,7 +80,7 @@ function createBox(imgUrl){
 }
 
 function createPageBox(rating){
-  
+
 }
 
 $(document).on("click", ".animal-btn", displayAnimalImage);

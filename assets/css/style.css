@@ -1,13 +1,19 @@
 body{
     background-color: beige;
 }
+.img-body{
+    display: inline-block;
+    float: none;
+}
 .img-box {
     border: 2px solid black;
-    float: left;
     height: 150px;
     width: 150px;
-}
-.page-box {
+    position: relative;
+
+}   
+.pg-box {
     border: 2px solid black;
-    width: 150px;
+    position: relative;
+    z-index: 1;
 }
