@@ -78,6 +78,10 @@ function createBox(imgUrl){
   imgBody.append(newImg);
 }
 
+function createPageBox(rating){
+  
+}
+
 $(document).on("click", ".animal-btn", displayAnimalImage);
 renderButton();
 imgBody.empty();
