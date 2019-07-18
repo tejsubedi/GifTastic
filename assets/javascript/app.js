@@ -1,10 +1,11 @@
 var animals = ["dog", "cat", "rabit", "goldfish", "bird", "chicken"];
 var apiKey = "7wvH2s5AVnzCW2IrWSg3D3SUhgmnGBXq";
-var input = $("#giphy-input");
+var input = $("#animal-input");
 var submit = $("#add-image");
 let imageView = $("#images-view");
 var addAnimal = $("#add-animal");
 var btnDisplayDiv = $("#buttons-view");
+
 
 function displayAnimals(e) {
   var animal = e.target.innerText;
@@ -42,8 +43,8 @@ let renderButton =() => {
 
 addAnimal.on("click", function (event) {
   event.preventDefault();
-  var animalPic = $("#animal-input").val().trim();
-  animals.push(animalPic);
+  var inpuVal = input.val().trim();
+  animals.push(inpuVal);
   renderButton();
 
 })
