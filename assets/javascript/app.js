@@ -2,8 +2,7 @@ var animals = ["dog", "cat", "rabit", "goldfish", "bird", "chicken"];
 var apiKey = "7wvH2s5AVnzCW2IrWSg3D3SUhgmnGBXq";
 var input = $("#animal-input");
 var submit = $("#add-image");
-let imageView = $("#images-view");
-var addAnimal = $("#add-animal");
+var imageView = $("#images-view");
 var btnDisplayDiv = $("#buttons-view");
 
 
@@ -41,7 +40,7 @@ let renderButton =() => {
 };
 
 
-addAnimal.on("click", function (event) {
+submit.on("click", function (event) {
   event.preventDefault();
   var inpuVal = input.val().trim();
   animals.push(inpuVal);
